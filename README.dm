@@ -1,4 +1,4 @@
-# Minha API
+# API: Criação de uma turma
 
 Este pequeno projeto o backend da Disciplina **Desenvolvimento Full Stack Básico** desenvolvida por Luis Frade
 
