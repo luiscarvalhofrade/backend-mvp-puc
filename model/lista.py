@@ -5,7 +5,7 @@ from typing import Union
 from model import Base
 
 
-class Aluno(Base):
+class Lista(Base):
     __tablename__ = 'lista'
 
     id = Column("pk_lista", Integer, primary_key=True)

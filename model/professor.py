@@ -5,7 +5,7 @@ from typing import Union
 from model import Base
 
 
-class professor(Base):
+class Professor(Base):
     __tablename__ = 'professor'
 
     id = Column("pk_professor", Integer, primary_key=True)
