@@ -41,7 +41,7 @@ class MateriaViewSchema(BaseModel):
     id: int = 1
     nome: str = "Portugues"
 
-class AlunoDelSchema(BaseModel):
+class MateriaDelSchema(BaseModel):
     """ Define como deve ser a estrutura do dado retornado após uma requisição
         de remoção.
     """
