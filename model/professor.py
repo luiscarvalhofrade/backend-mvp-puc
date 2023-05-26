@@ -1,8 +1,9 @@
 from sqlalchemy import Column, String, Integer, DateTime, ForeignKey
+from sqlalchemy.orm import relationship
 from datetime import datetime
 from typing import Union
 
-from model import Base
+from model import Base, Questao
 
 
 class Professor(Base):
@@ -14,6 +15,7 @@ class Professor(Base):
     matricula = Column(Integer, unique=True)
     materia = Column(Integer, ForeignKey("materia.pk_materia"), nullable=False)
     data_insercao = Column(DateTime, default=datetime.now())
+    questao = relationship("Questao")
 
     def __init__(self, nome:str, idade:int, materia: int, matricula:int,
                  data_insercao:Union[DateTime, None] = None):
@@ -35,4 +37,9 @@ class Professor(Base):
         # se não for informada, será o data exata da inserção no banco
         if data_insercao:
             self.data_insercao = data_insercao
+
+    def adiciona_questao(self, questao:Questao):
+        """ Adiciona uma nova questao criada pelo(a) Professor(a)
+        """
+        self.questoes.append(questao)
 

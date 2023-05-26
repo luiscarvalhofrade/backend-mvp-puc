@@ -1,8 +1,9 @@
-from sqlalchemy import Column, String, Integer, DateTime, ForeignKey, ARRAY
+from sqlalchemy import Column, String, Integer, DateTime, ForeignKey
+from sqlalchemy.orm import relationship
 from datetime import datetime
 from typing import Union
 
-from model import Base
+from model import Base, Questao
 
 
 class Lista(Base):
@@ -11,8 +12,8 @@ class Lista(Base):
     id = Column("pk_lista", Integer, primary_key=True)
     nome = Column(String(140), unique=True)
     materia = Column(Integer, ForeignKey("materia.pk_materia"), nullable=False)
-    questoes = Column(ARRAY(Integer, ForeignKey("questao.pk_questao")))
     data_insercao = Column(DateTime, default=datetime.now())
+    questao = relationship("Questao")
 
     def __init__(self, nome:str, materia:int, questoes:int,
                  data_insercao:Union[DateTime, None] = None):
@@ -27,8 +28,13 @@ class Lista(Base):
         """
         self.nome = nome
         self.materia = materia
-        self.questoes = questoes
+        
 
         # se não for informada, será o data exata da inserção no banco
         if data_insercao:
             self.data_insercao = data_insercao
+
+    def adiciona_questao(self, questao:Questao):
+        """ Adiciona uma nova questao a Lista
+        """
+        self.questoes.append(questao)
