@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, DateTime, ForeignKey
+from sqlalchemy import Column, Integer, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from datetime import datetime
 from typing import Union
@@ -10,28 +10,21 @@ class Professor(Base):
     __tablename__ = 'professor'
 
     id = Column("pk_professor", Integer, primary_key=True)
-    nome = Column(String(140), unique=True)
-    idade = Column(Integer)
-    matricula = Column(Integer, unique=True)
+    pessoa = Column(Integer, ForeignKey("pessoa.pk_pessoa"), nullable=False)
     materia = Column(Integer, ForeignKey("materia.pk_materia"), nullable=False)
     data_insercao = Column(DateTime, default=datetime.now())
     questao = relationship("Questao")
 
-    def __init__(self, nome:str, idade:int, materia: int, matricula:int,
+    def __init__(self, pessoa:int, materia: int,
                  data_insercao:Union[DateTime, None] = None):
         """
         Cria um(a) Professor(a)
 
         Arguments:
-            nome: nome do(a) professor(a).
-            idade: idade do(a) professor(a).
-            matricula: matricula do(a) professor(a).
-            materia: materia a qual o(a) professor(a) da aula.
-            data_insercao: data de quando o(a) professor(a) foi inserido
+            pessoa: pessoa atrelada ao professor
+            materia: materia a qual o(a) professor(a) da aula
         """
-        self.nome = nome
-        self.idade = idade
-        self.matricula = matricula
+        self.pessoa = pessoa
         self.materia = materia
 
         # se não for informada, será o data exata da inserção no banco
