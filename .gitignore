@@ -114,6 +114,7 @@ credentials.txt
 
 # log files
 *.log
+gunicorn.detailed.log
 
 database/
 
