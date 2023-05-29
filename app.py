@@ -31,15 +31,15 @@ def home():
 
 @app.post('/aluno', tags=[aluno_tag],
           responses={"200": AlunoViewSchema, "409": ErrorSchema, "400": ErrorSchema})
-def add_aluno(form: AlunoSchema):
+def add_aluno(json: AlunoSchema):
     """Adiciona um novo Aluno à turma
 
     Retorna uma representação dos alunos.
     """
     aluno = Aluno(
-        nome=form.nome,
-        idade=form.idade,
-        matricula=form.matricula)
+        nome=json.nome,
+        idade=json.idade,
+        matricula=json.matricula)
     logger.debug(f"Adicionando aluno de nome: '{aluno.nome}'")
     try:
         # criando conexão com a base
