@@ -19,7 +19,7 @@ class Aluno(Base):
         Cria um(a) Aluno(a)
 
         Arguments:
-            pessoa: pessoa atrelada ao aluno
+            pessoa: pessoa atrelada a(o) aluno(a)
             turma: turmad do(a) aluno(a)
         """
         self.pessoa = pessoa
